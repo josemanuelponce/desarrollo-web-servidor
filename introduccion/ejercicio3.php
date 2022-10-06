@@ -1,3 +1,5 @@
+<h1>Ejercicio 3</h1>
+
 <?php
     echo date("H:i a");
     echo "<br>";
