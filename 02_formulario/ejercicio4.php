@@ -1,4 +1,4 @@
-<form action="ejercicio4_respuesta" method="post">
+<form action="ejercicio4_respuesta.php" method="post">
 <label>Frase</label><br>
 <input type="text" name="frase"><br><br>
 <label>Encabezado</label><br>
