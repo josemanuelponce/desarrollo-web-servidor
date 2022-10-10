@@ -51,5 +51,12 @@
     <a href="ejercicio5.php">Ejercicio 5</a>
     </p>
 </div>
+<div>
+    <h2>Ejercicio 6</h2>
+    <p>
+    Formulario que reciba un numero y devuelva su factorial.<br>
+    <a href="ejercicio6.php">Ejercicio 6</a>
+    </p>
+</div>
 </body>
 </html>

@@ -5,5 +5,6 @@ $res =1;
 for ($i=1; $i <=$numero2; $i++) {
     $res =$res*$numero1;
 }
-echo "<p>$res</p>";
+
+echo "<p>El resultado es $res</p>";
 ?>
