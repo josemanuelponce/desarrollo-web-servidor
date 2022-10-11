@@ -12,12 +12,30 @@
     }
 </style>
 <body>
-<h1>Ejercicios de clase de formularios</h1>
 
+<h1>Ejercicios de clase de formularios</h1>
 
 <div>
     <h2>Ejercicio1</h2>
-    <a href="ejercicio1.php">Ejercicio 1</a>
+    <form action="" method="post">
+            <label>Nombre</label><br>
+            <input type="text" name="nombre"><br><br>
+            <label>Edad</label><br>
+            <input type="text" name="edad"><br><br>
+            <input type="hidden" name="f" value="ej1">
+            <input type="submit" value="Enviar">
+        </form>
+        <?php
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                if ($_POST["f"] == "ej1") {
+                    $nombre = $_POST["nombre"];
+                    $edad = $_POST["edad"];
+
+                    echo "<p>$nombre</p>";
+                    echo "<p>$edad</p>";
+                }
+            }
+        ?>
 </div>
 <div>
     <h2>Ejercicio2</h2>
