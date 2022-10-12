@@ -1,8 +1,10 @@
-<h1>ejercicio4</h1>
+
 
 <?php
-$frase =$_POST["frase"];
-$encabezado =$_POST["encabezado"];
-echo "<h$encabezado>$frase</h$encabezado>";
+    $frase = $_GET["frase"];
+    $e = $_GET["encabezado"];
 
+    echo "<h$e>$frase</h$e>";
+
+    echo "<h" . $e . ">" . $frase . "</h" . $e . ">";
 ?>
