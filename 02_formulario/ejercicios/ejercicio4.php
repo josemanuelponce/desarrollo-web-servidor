@@ -5,3 +5,7 @@
         <input type="text" name="encabezado"><br><br>
         <input type="submit" value="Enviar">
     </form>
+
+    <?php
+    require 'footer.php'
+    ?>

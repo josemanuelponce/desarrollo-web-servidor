@@ -16,8 +16,9 @@
 
 
 <div>
+    
     <h2>Ejercicio1</h2>
-    <a href="ejercicio1.php">Ejercicio 1</a>
+    <a href="ejercicios/ejercicio1.php">Ejercicio 1</a>
 </div>
 <div>
     <h2>Ejercicio2</h2>

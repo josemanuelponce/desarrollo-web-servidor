@@ -5,3 +5,7 @@
 <input type="text" name="numero2" pattern="^[0-9]+"><br><br>
 <input type="submit" value="Enviar">
 </form>
+
+<?php
+    require 'footer.php'
+?>

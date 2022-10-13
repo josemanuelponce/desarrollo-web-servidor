@@ -16,9 +16,9 @@
 <h1>Ejercicios de clase de formularios</h1>
 
 <div>
-    <h2>Ejercicio1</h2>
+    <h2 id="ej1">Ejercicio1</h2>
     <p>Formulario para poner tu nombre y edad</p>
-    <form action="" method="post">
+    <form action="#ej1" method="post">
             <label>Nombre</label><br>
             <input type="text" name="nombre"><br><br>
             <label>Edad</label><br>
@@ -39,11 +39,11 @@
         ?>
 </div>
 <div>
-    <h2>Ejercicio2</h2>
+    <h2 id="ej2">Ejercicio2</h2>
     <p>
         Crear un formulario que reciba un número. Generar una lista dinámicamente con tantos elementos como se haya indicado
     </p>
-    <form action="" method="post">
+    <form action="#ej2" method="post">
     <label>Numero</label><br>
     <input type="text" name="numero"><br><br>
     <input type="hidden" name="f" value="ej2">
@@ -65,7 +65,7 @@
         ?>
 </div>
 <div>
-    <h2>Ejercicio3</h2>
+    <h2 id="ej3">Ejercicio3</h2>
     <p>
     Crear un formulario que reciba el nombre y la edad de una persona y
     muestre por pantalla si es menor de edad, es adulta, o está jubilada en función
@@ -73,7 +73,7 @@
     - Convertir la edad a un número entero
     - Convertir el nombre introducido a minúsculas salvo la primera letra, que será mayúscula
 </p>
-    <form action="" method="get">
+    <form action="#ej3" method="get">
     <label>Nombre</label><br>
     <input type="text" name="nombre"><br><br>
     <label>Edad</label><br>
@@ -106,11 +106,11 @@
     ?>
 </div>
 <div>
-    <h2>Ejercicio4</h2>
+    <h2 id="ej4">Ejercicio4</h2>
     <p>
     Crear un formulario que reciba una frase y un número del 1 al 6. Habrá que mostrar la frase en un encabezado de dicho número. Si introducimos "5" y "Hola mundo" se mostrará un encabezado h5-Hola mundo-/h5
     </p>
-    <form action="" method="get">
+    <form action="#ej4" method="get">
         <label>Frase</label><br>
         <input type="text" name="frase"><br><br>
         <label>Encabezado</label><br>
@@ -136,11 +136,11 @@
     
 </div>
 <div>
-    <h2>Ejercicio 5</h2>
+    <h2 id="ej5">Ejercicio 5</h2>
     <p>
     Formulario que reciba dos números. Devolver el resultado de elevar el primero al segundo
     </p>
-    <form action="" method="get">
+    <form action="#ej5" method="get">
     <label>Numero 1</label><br>
     <input type="text" name="numero1"><br><br>
     <label>Numero 2</label><br>
@@ -176,11 +176,11 @@ echo "<p>El resultado es $res</p>";
     
 </div>
 <div>
-    <h2>Ejercicio 6</h2>
+    <h2 id="ej6">Ejercicio 6</h2>
     <p>
     Formulario que reciba un numero y devuelva su factorial<br>
     </p>
-    <form action="" method="get">
+    <form action="#ej6" method="get">
     <label>Numero 1</label><br>
     <input type="text" name="numero1"><br><br>
     <input type="hidden" name="f" value="ej6">

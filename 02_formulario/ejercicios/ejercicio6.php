@@ -3,3 +3,8 @@
 <input type="text" name="numero1"><br><br>
 <input type="submit" value="Enviar">
 </form>
+
+
+<?php
+    require 'footer.php'
+?>
