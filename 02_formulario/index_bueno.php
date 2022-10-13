@@ -141,39 +141,35 @@
     Formulario que reciba dos números. Devolver el resultado de elevar el primero al segundo
     </p>
     <form action="#ej5" method="get">
-    <label>Numero 1</label><br>
-    <input type="text" name="numero1"><br><br>
-    <label>Numero 2</label><br>
-    <input type="text" name="numero2"><br><br>
+    <label>base</label><br>
+    <input type="text" name="base"><br><br>
+    <label>exponente</label><br>
+    <input type="text" name="exponente"><br><br>
     <input type="hidden" name="f" value="ej5">
     <input type="submit" value="Enviar">
     </form>
     <?php
             if ($_SERVER["REQUEST_METHOD"] == "GET") {
                 if ($_GET["f"] == "ej5") {
-                    $numero1 = $_GET["numero1"];
-                    $numero2 = $_GET["numero2"];
-
+                    require 'funciones/potencia.php';
+                    $base=$_GET["base"];
+                    $exponente=$_GET["exponente"];
+                    $resultado = potencia($base, $exponente);
+                    if ($resultado==-1) {
+                        echo "<p>El numero no puede ser negateivo</p>";
+                    } else {
+                        echo "<p>El numero es $resultado</p>";
+                    }
                    
                 }
             }
-            $numero1 = $_GET["numero1"];
-            $numero2 = $_GET["numero2"];
-            $res =1;
-            if($exponente < 0){
-                echo "<p>El exponente debe ser positivo</p>";
-            }else{
-                for ($i=1; $i <=$numero2; $i++) {
-                $res =$res*$numero1;
-            }
-            }
-
-
-echo "<p>El resultado es $res</p>";
+          
+            
            
 ?>
 
-    
+
+
 </div>
 <div>
     <h2 id="ej6">Ejercicio 6</h2>
@@ -189,22 +185,14 @@ echo "<p>El resultado es $res</p>";
     <?php
             if ($_SERVER["REQUEST_METHOD"] == "GET") {
                 if ($_GET["f"] == "ej6") {
-                    $numero1 = $_GET["numero1"];
-                    
-
-                   
-                }
+                    require 'funciones/factorial.php';
+                    $resultado = $_GET["numero1"];
+                    $resultado = factorial("$numero1");
+                    echo "<p> El resultado es $resultado</p>";
+                }   
             }
-            $numero1 = $_GET["numero1"];
-            $factorial=1;
-            if ($numero1 >=1) {
-                for($i=1;$i<=$numero1;$i++){
-                $factorial=$factorial * $i;
-            }
-            echo "<p>El factorial de $numero1 es $factorial</p>";
-            }else {
-                echo "<p>El numero debe ser igual o mayor  que 1</p>";
-            }
+        
+            
            
 ?>
 </div>
@@ -307,6 +295,32 @@ echo "<p>El resultado es $res</p>";
             }
         }
     ?>
+</div>
+<div>
+<h2 id="ej8">Ejercicio 8</h2>
+        <p>Crea un formulario que reciba un número y muestre la tabla de multiplicar de dicho número</p>
+        <form action="#ej8" method="post">
+            <label>Número</label><br>
+            <input type="text" name="numero"><br><br>
+            <input type="hidden" name="f" value="ej8">
+            <input type="submit" value="Enviar">
+        </form>
+        <?php
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                if ($_POST["f"] == "ej8") {
+                    $numero = $_POST["numero"];
+                    echo "<table>";
+                    echo "<tr><th>Tabla del $numero</th></tr>";
+                    for ($i = 1; $i <= 10; $i++) {
+                        echo "<tr>";
+                        echo "<td>$numero x $i</td>";
+                        echo "<td>" . $numero * $i . "</td>";
+                        echo "</tr>";
+                    }
+                    echo "</table>";
+                }
+            }
+        ?>
 </div>
 </body>
 </html>
