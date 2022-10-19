@@ -15,6 +15,7 @@
 
         $temp_titulo = depurar($_POST["titulo"]);
         $temp_precio = depurar($_POST["precio"]);
+        $temp_descripcion = depurar($_POST["descripcion"]);
 
         if (empty($temp_titulo)) {
             $error_titulo = "El Títutlo es obligatorio";
@@ -44,6 +45,10 @@
                 $precio = $temp_precio;
             }
             }
+            if ($temp_descripcion > 255) {
+                $error_descripcion = "Descripcion correcta";
+            }
+
         }
 
         if (isset($titulo) && isset($precio)) {
@@ -93,7 +98,25 @@
                     ?>
             </span>
         </p>
+        <p>
+        <select name="consola" place required>
+        <option value=""></option>
+        <option>PS4</option>
+        <option>PS5</option>
+        <option>SWITCH</option>
+        <option>XBOX</option><br><br>
+        </select>
+        </p>
+        <p>
+            <textarea name="descripcion" placeholder="Max. 255 carácteres"></textarea>
+                <span class="error">
+                * <?php
+                    if (isset($error_descripcion)) echo $error_descripcion;
+                    ?>
+            </span>
+            </p>
         <input type="submit" name="Crear">
+        
 
     </form>
 </body>
