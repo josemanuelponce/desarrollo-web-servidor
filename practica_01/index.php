@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="./style.css" />
 </head>
 
 <body>
@@ -14,7 +15,7 @@
         <p>
             Un número primo es aquel que sólo es divisible entre sí mismo y 1. Crea un formulario que reciba dos números “a” y “b”. El formulario devolverá como respuesta los “a” primeros números primos empezando por “b”. Ej.: Si a=3 y b=4, se devolverán los tres primeros números primos empezando por 4. Es decir, 5, 7 y 11
         </p>
-        <form action="#ej1" method="get">
+        <form action="#ej1" method="post">
             <label>Numero 1</label><br>
             <input type="text" name="a"><br><br>
             <label>Numero 2</label><br>
@@ -23,26 +24,24 @@
             <input type="submit" value="Enviar">
         </form>
         <?php
-        if ($_SERVER["REQUEST_METHOD"] == "GET") {
-            if ($_GET["f"] == "ej1") {
-
-                $a = $_GET["a"];
-                $b = $_GET["b"];
-                echo "<p>$a</p>";
-                echo "<p>$b</p>";
+         if(isset($_POST['a']) && isset($_POST['b'])){
+            $a = $_POST['a'];
+            $b = $_POST['b'];
+            $cont = 0;
+            $num = $b;
+            while($cont < $a){
+                $div = 0;
+                for($i = 1; $i <= $num; $i++){
+                    if($num % $i == 0){
+                        $div++;
+                    }
+                }
+                if($div == 2){
+                    echo $num . "<br>";
+                    $cont++;
+                }
+                $num++;
             }
-        
-        $cont = 0;
-        $a = $_GET["a"];
-        $b = $_GET["b"];
-        while ($cont > $b) {
-            if ($b % 2 == 1) {
-                echo "<p>El numero es primo</p>";
-                $cont++;
-            } else {
-                echo "<p>El numero no es primo</p>";
-            }
-        }
         }
         ?>
     </div>
@@ -55,7 +54,7 @@
             No usar expresiones regulares
         </p>
         <form action="#ej2" method="post">
-            <label>Dni</label>
+            <label>Dni</label><br>
             <input type="text" name="dni"><br><br>
             <input type="hidden" name="f" value="ej2">
             <input type="submit" value="enviar">
