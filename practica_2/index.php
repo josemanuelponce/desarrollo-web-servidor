@@ -29,6 +29,7 @@
                 $error_dni = "El DNI tiene 8 dígitos y un carácter";
             } else {
                 $dni = $temp_dni;
+                
             }
         }
 
@@ -37,6 +38,41 @@
             $error_nombre = "El nombre es obligatorio";
         }else {
             $pattern = "/^[a-zA-Z áéíóúÁÉÍÓÚñÑ]+$/";
+
+            if (!preg_match($pattern, $temp_nombre)) {
+                $error_nombre = "El nombre solo puede contener letras";
+            } else {
+                $nombre = $temp_nombre;
+                echo ucwords("$nombre");
+            }           
+        }
+
+        //Validacion de primer apellido
+        if (empty($temp_primerA)) {
+            $error_primerA = "El apellido es obligatorio";
+        }else {
+            $pattern = "/^[a-zA-Z áéíóúÁÉÍÓÚñÑ]+$/";
+
+            if (!preg_match($pattern, $temp_primerA)) {
+                $error_primerA = "El apellido solo puede contener letras";
+            } else {
+                $primerA = $temp_primerA;
+                echo ucfirst(" $primerA");
+            }           
+        }
+
+        //Validacion de segundo apellido
+        if (empty($temp_segundoA)) {
+            $error_segundoA = "El apellido es obligatorio";
+        }else {
+            $pattern = "/^[a-zA-Z áéíóúÁÉÍÓÚñÑ]+$/";
+
+            if (!preg_match($pattern, $temp_segundoA)) {
+                $error_segundoA = "El apellido solo puede contener letras";
+            } else {
+                $segundoA = $temp_segundoA;
+                echo ucfirst(" $segundoA");
+            }           
         }
 
         //Validacion de edad
@@ -50,6 +86,7 @@
                 $error_edad = "Eres menor de edad";
                 }else {
                     $edad = $temp_edad;
+                    
                 }
             }
 
@@ -65,7 +102,7 @@
             if (!$temp_correo) {
                 $error_correo = "El email no es válido";
             } else {
-                if (strpos($temp_correo, $needle)) {
+                if (str_contains($temp_correo, $needle)) {
                     $error_correo = "Palabra no permitida";
                 }else {
                     $correo = $temp_correo;
