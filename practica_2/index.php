@@ -25,18 +25,24 @@
         } else {
             $pattern = "/^[0-9]{8}[a-zA-Z]$/";
 
+
             if (!preg_match($pattern, $temp_dni)) {
                 $error_dni = "El DNI tiene 8 dígitos y un carácter";
             } else {
-                $dni = $temp_dni;
-                
+                $letras = strtoupper(substr($temp_dni, -1));
+                $temp_dni = substr($temp_dni, 0, -1);
+                if (substr("TRWAGMYFPDXBNJZSQVHLCKE", $temp_dni % 23, 1) == $letras && strlen($letras) == 1 &&  strlen($temp_dni) == 8) {
+                    $dni = $temp_dni;
+                } else {
+                    $error_dni = "No valido numero incorrectos";
+                }
             }
         }
 
         //Validacion nombre
         if (empty($temp_nombre)) {
             $error_nombre = "El nombre es obligatorio";
-        }else {
+        } else {
             $pattern = "/^[a-zA-Z áéíóúÁÉÍÓÚñÑ]+$/";
 
             if (!preg_match($pattern, $temp_nombre)) {
@@ -44,76 +50,71 @@
             } else {
                 $nombre = $temp_nombre;
                 echo ucwords("$nombre");
-            }           
+            }
         }
 
         //Validacion de primer apellido
         if (empty($temp_primerA)) {
             $error_primerA = "El apellido es obligatorio";
-        }else {
+        } else {
             $pattern = "/^[a-zA-Z áéíóúÁÉÍÓÚñÑ]+$/";
 
             if (!preg_match($pattern, $temp_primerA)) {
                 $error_primerA = "El apellido solo puede contener letras";
             } else {
                 $primerA = $temp_primerA;
-                echo ucfirst(" $primerA");
-            }           
+                echo ucwords(" $primerA");
+            }
         }
 
         //Validacion de segundo apellido
         if (empty($temp_segundoA)) {
             $error_segundoA = "El apellido es obligatorio";
-        }else {
+        } else {
             $pattern = "/^[a-zA-Z áéíóúÁÉÍÓÚñÑ]+$/";
 
             if (!preg_match($pattern, $temp_segundoA)) {
                 $error_segundoA = "El apellido solo puede contener letras";
             } else {
                 $segundoA = $temp_segundoA;
-                echo ucfirst(" $segundoA");
-            }           
+                echo ucwords(" $segundoA");
+            }
         }
 
         //Validacion de edad
         if (empty($temp_edad)) {
             $error_edad = "La edad es obligatoria";
         } else {
-            if ($temp_edad<0 || $temp_edad>120) {
+            if ($temp_edad < 0 || $temp_edad > 120) {
                 $error_edad = "La edad tiene que ser entre 0 y 120";
-            }else{
-                if ($temp_edad<18) {
-                $error_edad = "Eres menor de edad";
-                }else {
+            } else {
+                if ($temp_edad < 18) {
+                    $error_edad = "Eres menor de edad";
+                } else {
                     $edad = $temp_edad;
-                    
                 }
             }
-
         }
 
         //Validacion de correo
         $needle = "hola";
         if (empty($temp_correo)) {
             $error_correo = "El correo es obligatorio";
-        }else {
+        } else {
             $temp_correo = filter_var($temp_correo, FILTER_VALIDATE_EMAIL);
-            
+
             if (!$temp_correo) {
                 $error_correo = "El email no es válido";
             } else {
                 if (str_contains($temp_correo, $needle)) {
                     $error_correo = "Palabra no permitida";
-                }else {
+                } else {
                     $correo = $temp_correo;
                 }
-
-                
             }
-        
         }
     }
-    
+
 
 
 
@@ -166,7 +167,7 @@
         </p>
         <input type="submit" name="Enviar">
         </p>
-      
+
     </form>
 </body>
 
