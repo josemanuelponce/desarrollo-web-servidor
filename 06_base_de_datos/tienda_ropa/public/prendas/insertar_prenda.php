@@ -11,24 +11,38 @@
 
 <body>
     <?php
-    require 'util/base_de_datos.php';
+    require '../../util/base_de_datos.php';
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $nombre = $_POST["nombre"];
         $talla = $_POST["talla"];
         $precio = $_POST["precio"];
+        if (isset($_POST["categoria"])) {
+            $categoria = $_POST["categoria"];
+        } else {
+            $categoria = "";
+        }
 
         if (!empty($nombre) && !empty($talla) && !empty($precio)) {
-            $sql = "INSERT INTO prendas (nombre, talla, precio)
-                VALUES ('$nombre', '$talla', '$precio')";
+            if (!empty($categoria)) {
+                $sql = "INSERT INTO prendas (nombre, talla, precio, categoria)
+                    VALUES ('$nombre', '$talla', '$precio', '$categoria')";
+            } else {
+                $sql = "INSERT INTO prendas (nombre, talla, precio)
+                    VALUES ('$nombre', '$talla', '$precio')";
+            }
+
+
             if ($conexion->query($sql) == "TRUE") {
                 echo "<p>Prenda insertada</p>";
             } else {
-                echo "<p>Error al insertada</p>";
+                echo "<p>Error al insertar</p>";
             }
         }
     }
     ?>
     <div class="container">
+        <?php require '../header.php' ?>
+        <br>
         <h1>Nueva Prenda</h1>
         <div class="row">
             <div class="col-6">
@@ -38,28 +52,31 @@
                         <input class="form-control" type="text" name="nombre">
                     </div>
                     <div class="form-group mb-3">
-                        <select class="form-select" aria-label="Default select example" name="talla">
-                            <option selected>Talla</option>
-                            <option value="1">XS</option>
-                            <option value="2">S</option>
-                            <option value="3">M</option>
-                            <option value="4">L</option>
-                            <option value="5">XL</option>
-                        </select>
-                    </div>
-                    <div class="form-group mb-3">
-                        <select class="form-select" aria-label="Default select example" name="ropa">
-                            <option selected>Ropa</option>
-                            <option value="1">Camiseta</option>
-                            <option value="2">Pantalones</option>
-                            <option value="3">Accesorio</option>
+                        <label class="form-label">Talla</label>
+                        <select class="form-select" name="talla">
+                            <option value="" selected disabled hidden>-- Selecciona la talla --</option>
+                            <option value="XS">XS</option>
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
                         </select>
                     </div>
                     <div class="form-group mb-3">
                         <label class="form-label">Precio</label>
                         <input class="form-control" type="text" name="precio">
                     </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">Categoría</label>
+                        <select class="form-select" name="categoria">
+                            <option value="" selected disabled hidden>-- Selecciona la categoría --</option>
+                            <option value="CAMISETAS">Camisetas</option>
+                            <option value="PANTALONES">Pantalones</option>
+                            <option value="ACCESORIOS">Accesorios</option>
+                        </select>
+                    </div>
                     <button class="btn btn-primary" type="submit">Crear</button>
+                    <a class="btn btn-secondary" href="index.php">Volver</a>
                 </form>
             </div>
         </div>
