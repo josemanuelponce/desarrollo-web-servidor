@@ -12,7 +12,7 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <a class="nav-link" href="http://localhost/06_base_de_datos/tienda_ropa/public/prendas/insertar_prenda.php">Prendas</a>
-        <a class="nav-link" href="#">Clientes</a>
+        <a class="nav-link" href="http://localhost/06_base_de_datos/tienda_ropa/public/clientes/insertar_cliente.php">Clientes</a>
       </div>
     </div>
   </div>
