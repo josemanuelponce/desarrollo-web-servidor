@@ -24,21 +24,25 @@
 
 
         if (!empty($usuario) && !empty($nombre) && !empty($apellido_1) && !empty($apellido_2) && !empty($apellido_1) && !empty($fecha)) {
-            
-                $sql = "INSERT INTO clientes (usuario, nombre, apellido_1, apellido_2, fecha_nacimiento)
+
+            $sql = "INSERT INTO clientes (usuario, nombre, apellido_1, apellido_2, fecha_nacimiento)
                     VALUES ('$usuario', '$nombre', '$apellido_1', '$apellido_2', '$fecha')";
-            } else {
-                $sql = "INSERT INTO clientes (usuario, nombre, apellido_1, apellido_2)
+        } else {
+            $sql = "INSERT INTO clientes (usuario, nombre, apellido_1, apellido_2)
                 VALUES ('$usuario', '$nombre', '$apellido_1', '$apellido_2')";
-            }
+        }
 
 
-            if ($conexion->query($sql) == "TRUE") {
-                echo "<p>Cliente insertado</p>";
-            } else {
-                echo "<p>Error al insertar</p>";
-            }
-        
+        if ($conexion->query($sql) == "TRUE") {
+    ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                Se ha insertado correctamente
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+    <?php
+        } else {
+            echo "<p>Error al insertar</p>";
+        }
     }
     ?>
     <div class="container">

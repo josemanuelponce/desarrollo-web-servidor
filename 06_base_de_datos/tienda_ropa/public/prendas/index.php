@@ -46,6 +46,18 @@
                                     <td><?php echo $talla ?></td>
                                     <td><?php echo $precio ?></td>
                                     <td><?php echo $categoria ?></td>
+                                    <td>
+                                        <form action="mostrar_prenda.php" method="get">
+                                            <button class="btn btn-primary" type="submit">Ver</button>
+                                            <input type="hidden" name="id" value="<?php echo $fila["id"] ?>">
+                                        </form>
+                                    <td>
+                                    <form action="borrar_prenda.php" method="get">
+                                            <button class="btn btn-danger" type="submit">Borrar</button>
+                                            <input type="hidden" name="id" value="<?php echo $fila["id"] ?>">
+                                        </form>
+                                    </td>
+                                    </td>
                                 </tr>
                         <?php
                             }
