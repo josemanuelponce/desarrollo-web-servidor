@@ -5,33 +5,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <title>Borrar prenda</title>
+    <title>Borrar cliente</title>
 </head>
 <body>
 <div class="container">
     <?php require '../../util/base_de_datos.php'?>
     <?php require '../header.php'?>
-<h1>Ver prenda</h1>
+<h1>Ver cliente</h1>
     <?php
     if ($_SERVER["REQUEST_METHOD"] == "GET") {
         $id = $_GET["id"];
         echo "<p>$id</p>";
-        
-        //Consulta para coger la ruta de la image y luego borrarla
-        $sql = "SELECT imagen FROM prendas WHERE id = '$id'";
-        $resultado = $conexion ->query($sql);
-        
-        if($resultado -> num_rows > 0) {
-            while ($fila = $resultado ->fetch_assoc()) {
-                $imagen = $fila["imagen"];
-            }
-            
-        }
 
-        $sql = "DELETE FROM prendas WHERE id = '$id'";
+        $sql = "DELETE FROM clientes WHERE id = '$id'";
         
         if ($conexion ->query($sql)) {
-            echo "borrada prenda";
+            echo "Cliente borrado";
         }else {
             echo "Error al borrar";
         }

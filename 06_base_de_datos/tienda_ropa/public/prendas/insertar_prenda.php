@@ -21,19 +21,37 @@
         } else {
             $categoria = "";
         }
+        $file_name = $_FILES["imagen"]["name"];
+        $file_temp_name = $_FILES["imagen"]["tmp_name"];
+        $path = "../../resources/images/prendas/" . $file_name;
+
 
         if (!empty($nombre) && !empty($talla) && !empty($precio)) {
-            if (!empty($categoria)) {
-                $sql = "INSERT INTO prendas (nombre, talla, precio, categoria)
-                    VALUES ('$nombre', '$talla', '$precio', '$categoria')";
+            //  Subimos la imagen a la carpeta deseada
+            if (move_uploaded_file($file_temp_name, $path)) {
+                echo "<p>Fichero movido con éxito</p>";
             } else {
-                $sql = "INSERT INTO prendas (nombre, talla, precio)
-                    VALUES ('$nombre', '$talla', '$precio')";
+                echo "<p>No se ha podido mover el fichero</p>";
+            }
+
+            //  Insertamos la prenda en la base de datos
+            $imagen = "/resources/images/prendas/" . $file_name;
+            if (!empty($categoria)) {
+                $sql = "INSERT INTO prendas (nombre, talla, precio, categoria, imagen)
+                    VALUES ('$nombre', '$talla', '$precio', '$categoria', '$imagen')";
+            } else {
+                $sql = "INSERT INTO prendas (nombre, talla, precio, imagen)
+                    VALUES ('$nombre', '$talla', '$precio', '$imagen')";
             }
 
 
             if ($conexion->query($sql) == "TRUE") {
-                echo "<p>Prenda insertada</p>";
+    ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Se ha insertado la prenda
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+    <?php
             } else {
                 echo "<p>Error al insertar</p>";
             }
@@ -46,7 +64,7 @@
         <h1>Nueva Prenda</h1>
         <div class="row">
             <div class="col-6">
-                <form action="" method="post">
+                <form action="" method="post" enctype="multipart/form-data">
                     <div class="form-group mb-3">
                         <label class="form-label">Nombre</label>
                         <input class="form-control" type="text" name="nombre">
@@ -75,8 +93,12 @@
                             <option value="ACCESORIOS">Accesorios</option>
                         </select>
                     </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">Imagen</label>
+                        <input class="form-control" type="file" name="imagen">
+                    </div>
                     <button class="btn btn-primary" type="submit">Crear</button>
-                    <a class="btn btn-secondary" href="index.php">Volver</a>
+                    <a class="btn btn-secondary" href="index.php">Tabla</a>
                 </form>
             </div>
         </div>

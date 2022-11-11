@@ -31,6 +31,7 @@
                     </thead>
                     <tbody>
                         <?php
+                        
                         require '../../util/base_de_datos.php';
                         $sql = "SELECT * FROM clientes";
                         $resultado = $conexion->query($sql);
@@ -42,7 +43,8 @@
                                 $apellido_1 = $fila["apellido_1"];
                                 $apellido_2 = $fila["apellido_2"];
                                 $fecha = $fila["fecha_nacimiento"];
-                               
+                                $imagen = $fila["imagen"];
+                            
                         ?>
                                 <tr>
                                     <td><?php echo $usuario ?></td>
@@ -50,6 +52,19 @@
                                     <td><?php echo $apellido_1 ?></td>
                                     <td><?php echo $apellido_2 ?></td>
                                     <td><?php echo $fecha ?></td>
+                                    <td>
+                                        <form action="mostrar_cliente.php" method="get">
+                                            <button class="btn btn-primary" type="submit">Ver</button>
+                                            <input type="hidden" name="id" value="<?php echo $fila["id"] ?>">
+                                        </form>
+                                    </td> 
+                                    <td>
+                                    <form action="borrar_cliente.php" method="get">
+                                            <button class="btn btn-danger" type="submit">Borrar</button>
+                                            <input type="hidden" name="id" value="<?php echo $fila["id"] ?>">
+                                        </form>
+                                    
+                                    </td>
                                 </tr>
                         <?php
                             }

@@ -18,30 +18,38 @@
         $apellido_1 = $_POST["apellido_1"];
         $apellido_2 = $_POST["apellido_2"];
         $fecha = $_POST["fecha"];
-        echo $fecha;
-        $fechaBD = date("d-m-Y", strtotime($fecha));
 
 
+        $file_name = $_FILES["imagen"]["name"];
+        $file_temp_name = $_FILES["imagen"]["tmp_name"];
+        $path = "../../resources/images/clientes/" . $file_name;
+        
 
-        if (!empty($usuario) && !empty($nombre) && !empty($apellido_1) && !empty($apellido_2) && !empty($apellido_1) && !empty($fecha)) {
-
-            $sql = "INSERT INTO clientes (usuario, nombre, apellido_1, apellido_2, fecha_nacimiento)
-                    VALUES ('$usuario', '$nombre', '$apellido_1', '$apellido_2', '$fecha')";
-        } else {
-            $sql = "INSERT INTO clientes (usuario, nombre, apellido_1, apellido_2)
-                VALUES ('$usuario', '$nombre', '$apellido_1', '$apellido_2')";
-        }
+        
 
 
-        if ($conexion->query($sql) == "TRUE") {
-    ?>
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                Se ha insertado correctamente
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-    <?php
-        } else {
-            echo "<p>Error al insertar</p>";
+        if (!empty($usuario) && !empty($nombre) && !empty($apellido_1 &&
+            !empty($fecha))) {
+            $apellido_2 =
+                !empty($apellido_2) ? "'$apellido_2'" : "NULL";
+            if (move_uploaded_file($file_temp_name, $path)) {
+                echo "<p>Fichero movido con éxito</p>";
+            } else {
+                echo "<p>No se ha podido mover el fichero</p>";
+            }
+
+            $imagen = "/resources/images/clientes/" . $file_name;
+            $sql = "INSERT INTO clientes (usuario, nombre, 
+                    apellido_1, apellido_2, 
+                    fecha_nacimiento,imagen) VALUES ('$usuario', '$nombre',
+                    '$apellido_1', $apellido_2,
+                    '$fecha', '$imagen')";
+
+            if ($conexion->query($sql) == "TRUE") {
+                echo "<p>Cliente insertado</p>";
+            } else {
+                echo "<p>Error al insertar</p>";
+            }
         }
     }
     ?>
@@ -72,8 +80,12 @@
                         <label class="form-label">Fecha de nacimiento</label>
                         <input class="form-control" type="date" name="fecha">
                     </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">Imagen</label>
+                        <input class="form-control" type="file" name="imagen">
+                    </div>
                     <button class="btn btn-primary" type="submit">Crear</button>
-                    <a class="btn btn-secondary" href="index.php">Volver</a>
+                    <a class="btn btn-secondary" href="index.php">Tabla</a>
                 </form>
 
 
