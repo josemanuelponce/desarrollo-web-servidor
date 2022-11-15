@@ -43,7 +43,6 @@
                                 $apellido_1 = $fila["apellido_1"];
                                 $apellido_2 = $fila["apellido_2"];
                                 $fecha = $fila["fecha_nacimiento"];
-                                $imagen = $fila["imagen"];
                             
                         ?>
                                 <tr>
