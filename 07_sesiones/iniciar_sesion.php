@@ -15,6 +15,7 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $usuario = $_POST["usuario"];
         $contrasena = $_POST["contrasena"];
+        $rol = $_POST["rol"];
 
         $sql = "SELECT * FROM usuarios WHERE usuario = '$usuario'";
         $resultado = $conexion -> query(($sql));
@@ -22,12 +23,17 @@
         if ($resultado ->num_rows > 0) {
             while ($fila = $resultado -> fetch_assoc()) {
                 $hash_contrasena = $fila["contrasena"];
+                $rol = $fila["rol"];
             }
             $acceso_valido = password_verify($contrasena, $hash_contrasena);
 
 
             if ($acceso_valido == TRUE) {
                 echo "<h2>ACCESO VALIDO</h2>";
+                session_start();
+                $_SESSION["usuario"] = $usuario;
+                $_SESSION["rol"] = $rol;
+                header("location: index.php");
             }else {
                 echo "<h2>Contraseña equivocada</h2>";
             }
@@ -50,9 +56,11 @@
                         <label class="form-label">Contraseña</label>
                         <input class="form-control" name="contrasena" type="password">
                     </div>
+                    </div>
                     <div class="form-group mb-3">
                         <button class="btn btn-primary" type="submit">Registrarse</button>
                     </div>
+                    
                 </form>
             </div>
         </div>
