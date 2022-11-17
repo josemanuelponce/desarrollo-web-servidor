@@ -11,6 +11,8 @@
 
 <body>
     <div class="container">
+        <?php require '../../util/control_acceso.php' ?>
+        <?php require '../../util/base_de_datos.php' ?>
         <?php require '../header.php' ?>
         <br>
         <h1>Listado de clientes</h1>
@@ -31,8 +33,8 @@
                     </thead>
                     <tbody>
                         <?php
-                        
-                        require '../../util/base_de_datos.php';
+
+
                         $sql = "SELECT * FROM clientes";
                         $resultado = $conexion->query($sql);
 
@@ -43,8 +45,8 @@
                                 $apellido_1 = $fila["apellido_1"];
                                 $apellido_2 = $fila["apellido_2"];
                                 $fecha = $fila["fecha_nacimiento"];
-                            
                         ?>
+
                                 <tr>
                                     <td><?php echo $usuario ?></td>
                                     <td><?php echo $nombre ?></td>
@@ -56,13 +58,13 @@
                                             <button class="btn btn-primary" type="submit">Ver</button>
                                             <input type="hidden" name="id" value="<?php echo $fila["id"] ?>">
                                         </form>
-                                    </td> 
+                                    </td>
                                     <td>
-                                    <form action="borrar_cliente.php" method="get">
+                                        <form action="borrar_cliente.php" method="get">
                                             <button class="btn btn-danger" type="submit">Borrar</button>
                                             <input type="hidden" name="id" value="<?php echo $fila["id"] ?>">
                                         </form>
-                                    
+
                                     </td>
                                 </tr>
                         <?php

@@ -6,13 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <title>Cliente</title>
+    <title>Document</title>
 </head>
 
 <body>
-    <?php require '../../util/control_acceso.php' ?>
+    <?php require '../util/base_de_datos.php' ?>
     <?php
-    require '../../util/base_de_datos.php';
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $usuario = $_POST["usuario"];
         $nombre = $_POST["nombre"];
@@ -20,41 +19,26 @@
         $apellido_2 = $_POST["apellido_2"];
         $fecha_nacimiento = $_POST["fecha_nacimiento"];
         $contrasena = $_POST["contrasena"];
-        $rol = $_POST["rol"];
 
         $hash_contrasena = password_hash($contrasena, PASSWORD_DEFAULT);
 
-
-        if (
-            !empty($usuario) && !empty($nombre) &&
-            !empty($apellido_1 &&
-                !empty($fecha_nacimiento) &&
-                !empty($contrasena) &&
-                !empty($rol))
-        ) {
-
-            $apellido_2 =
-                !empty($apellido_2) ? "'$apellido_2'" : "NULL";
-
-
-            $sql = "INSERT INTO clientes (usuario, nombre, 
+        $sql = "INSERT INTO clientes (usuario, nombre, 
                     apellido_1, apellido_2, 
-                    fecha_nacimiento, contrasena, rol) VALUES ('$usuario', '$nombre',
+                    fecha_nacimiento, contrasena) VALUES ('$usuario', '$nombre',
                     '$apellido_1', $apellido_2,
-                    '$fecha_nacimiento', '$hash_contrasena', '$rol')";
+                    '$fecha_nacimiento', '$hash_contrasena')";
 
-            if ($conexion->query($sql) == "TRUE") {
-                echo "<p>Cliente insertado</p>";
-            } else {
-                echo "<p>Error al insertar</p>";
-            }
+        if ($conexion->query($sql) == "TRUE") {
+            echo "<p>Cliente insertado</p>";
+            header("location: http://localhost/06_bases_de_datos/tienda_ropa/public/inicio_sesion.php");
+        } else {
+            echo "<p>Error al insertar</p>";
         }
     }
     ?>
     <div class="container">
-    <?php require '../header.php' ?>
         <br>
-        <h1>Nuevo Cliente</h1>
+        <h1>Registrarte</h1>
         <div class="row">
             <div class="col-6">
                 <form action="" method="post">
@@ -83,15 +67,8 @@
                         <input class="form-control" name="contrasena" type="password">
                     </div>
                     <div class="form-group mb-3">
-                        <label class="form-label">Rol</label>
-                        <select class="form-select" name="rol">
-                            <option value="" selected disabled hidden>-- Selecciona el rol --</option>
-                            <option value="administrador">Administrador</option>
-                            <option value="cliente">Cliente</option>
-                        </select>
+                        <button class="btn btn-primary" type="submit">Registrarse</button>
                     </div>
-                    <button class="btn btn-primary" type="submit">Crear</button>
-                    <a class="btn btn-secondary" href="index.php">Tabla</a>
                 </form>
 
 
@@ -99,7 +76,6 @@
             </div>
         </div>
     </div>
-
 
 
 

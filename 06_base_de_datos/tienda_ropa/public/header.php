@@ -11,11 +11,19 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link" href="http://localhost/06_base_de_datos/tienda_ropa/public/prendas/insertar_prenda.php">Prendas</a>
-        <a class="nav-link" href="http://localhost/06_base_de_datos/tienda_ropa/public/clientes/insertar_cliente.php">Clientes</a>
+      <?php
+        if ($_SESSION["rol"] == "administrador") {
+        ?>
+        <a class="nav-link" href="http://localhost/06_base_de_datos/tienda_ropa/public/prendas/">Prendas</a>
+        <a class="nav-link" href="http://localhost/06_base_de_datos/tienda_ropa/public/clientes/">Clientes</a>
         <a class="nav-link" href="http://localhost/06_base_de_datos/tienda_ropa/public/compras/index.php">Compras</a>
+        <?php
+        }
+        ?>
         <a class="nav-link" href="http://localhost/06_base_de_datos/tienda_ropa/public/compras/nueva_compra.php">Nueva compra</a>
-        <a class="nav-link" href="http://localhost/06_base_de_datos/tienda_ropa/public/clientes/inicio_sesion.php">Inicia sesion</a>
+        <a class="nav-link" href="http://localhost/06_base_de_datos/tienda_ropa/public/inicio_sesion.php">Iniciar sesion</a>
+        <a class="nav-link" href="http://localhost/06_base_de_datos/tienda_ropa/public/cerrar_sesion.php">Cerrar sesion</a>
+        <a class="nav-link" href="">Bienvenid@ <?php echo $_SESSION["usuario"] ?></a>
       </div>
     </div>
   </div>

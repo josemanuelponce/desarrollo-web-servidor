@@ -10,37 +10,43 @@
 </head>
 
 <body>
+    <div class="container">
+        <?php require '../util/base_de_datos.php' ?>
+
+        <?php
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $usuario = $_POST["usuario"];
+            $contrasena = $_POST["contrasena"];
 
 
-    <?php
-    require '../../util/base_de_datos.php';
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $usuario = $_POST["usuario"];
-        $contrasena = $_POST["contrasena"];
 
-        
+            $sql = "SELECT * FROM clientes WHERE usuario = '$usuario'";
+            $resultado = $conexion->query(($sql));
 
-        $sql = "SELECT * FROM clientes WHERE usuario = '$usuario'";
-        $resultado = $conexion->query(($sql));
-
-        if ($resultado->num_rows > 0) {
-            while ($fila = $resultado->fetch_assoc()) {
-                $hash_contrasena = $fila["contrasena"];
-            }
-            $acceso_valido = password_verify($contrasena, $hash_contrasena);
+            if ($resultado->num_rows > 0) {
+                while ($fila = $resultado->fetch_assoc()) {
+                    $hash_contrasena = $fila["contrasena"];
+                    $rol = $fila["rol"];
+                }
+                $acceso_valido = password_verify($contrasena, $hash_contrasena);
 
 
-            if ($acceso_valido == TRUE) {
-                echo "<h2>ACCESO VALIDO</h2>";
-            } else {
-                echo "<h2>Contraseña equivocada</h2>";
+                if ($acceso_valido == TRUE) {
+                    echo "<h2>ACCESO VALIDO</h2>";
+                    session_start();
+                    $_SESSION["usuario"] = $usuario;
+                    $_SESSION["rol"] = $rol;
+
+                    header("location: http://localhost/06_base_de_datos/tienda_ropa/public/");
+                } else {
+                    echo "<h2>Contraseña equivocada</h2>";
+                }
             }
         }
-    }
 
-    ?>
-    <div class="container">
-    <?php require '../header.php' ?>
+        ?>
+
+
         <h1>Inicia sesion</h1>
 
         <div class="row">
@@ -55,11 +61,12 @@
                         <input class="form-control" name="contrasena" type="password">
                     </div>
                     <div class="form-group mb-3">
-                        <button class="btn btn-primary" type="submit">Registrarse</button>
+                        <button class="btn btn-primary" type="submit">Iniciar sesion</button>
                     </div>
                     <div class="form-group mb-3">
                         <button class="btn btn-dark" type="reset">Reset</button>
                     </div>
+                    
                 </form>
             </div>
         </div>
