@@ -11,6 +11,7 @@
 
 <body>
     <div class="container">
+        <?php require '../../util/control_acceso.php' ?>
         <?php require '../../util/base_de_datos.php' ?>
         <?php require '../header.php' ?>
         <br>

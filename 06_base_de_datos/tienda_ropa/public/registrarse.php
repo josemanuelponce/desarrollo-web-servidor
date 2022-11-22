@@ -19,18 +19,19 @@
         $apellido_2 = $_POST["apellido_2"];
         $fecha_nacimiento = $_POST["fecha_nacimiento"];
         $contrasena = $_POST["contrasena"];
+        $rol = $_POST["rol"];
 
         $hash_contrasena = password_hash($contrasena, PASSWORD_DEFAULT);
 
         $sql = "INSERT INTO clientes (usuario, nombre, 
                     apellido_1, apellido_2, 
-                    fecha_nacimiento, contrasena) VALUES ('$usuario', '$nombre',
+                    fecha_nacimiento, contrasena, rol) VALUES ('$usuario', '$nombre',
                     '$apellido_1', $apellido_2,
-                    '$fecha_nacimiento', '$hash_contrasena')";
+                    '$fecha_nacimiento', '$hash_contrasena', '$rol')";
 
         if ($conexion->query($sql) == "TRUE") {
             echo "<p>Cliente insertado</p>";
-            header("location: http://localhost/06_bases_de_datos/tienda_ropa/public/inicio_sesion.php");
+            header("location: http://localhost/06_base_de_datos/tienda_ropa/public/inicio_sesion.php");
         } else {
             echo "<p>Error al insertar</p>";
         }
@@ -67,7 +68,15 @@
                         <input class="form-control" name="contrasena" type="password">
                     </div>
                     <div class="form-group mb-3">
+                        <label class="form-label">Rol</label>
+                        <select class="form-select" name="rol">
+                            <option value="cliente">Cliente</option>
+                            <option value="administrador">Administrador</option>
+                        </select>
+                    </div>
+                    <div class="form-group mb-3">
                         <button class="btn btn-primary" type="submit">Registrarse</button>
+                        <a class="btn btn-secondary" href="inicio_sesion.php">Volver</a>
                     </div>
                 </form>
 

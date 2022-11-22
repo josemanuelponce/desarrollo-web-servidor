@@ -11,6 +11,7 @@
 
 <body>
     <?php
+    require '../../util/control_acceso.php';
     require '../../util/base_de_datos.php';
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $nombre = $_POST["nombre"];
@@ -32,6 +33,40 @@
                 echo "<p>Fichero movido con éxito</p>";
             } else {
                 echo "<p>No se ha podido mover el fichero</p>";
+            }
+
+            //Validacion de precio
+            $temp_precio = depurar($_POST["precio"]);
+            if (empty($temp_precio)) {
+                $err_precio = "El precio es obligatorio";
+            } else {
+                $temp_precio = filter_var($temp_precio, FILTER_VALIDATE_FLOAT);
+
+                if (!$temp_precio) {
+                    $err_precio = "El precio debe ser un número";
+                } else {
+                    $temp_precio = round($temp_precio, 2);
+                    if ($temp_precio < 0) {
+                        $err_precio = "El precio no puede ser negativo";
+                    } else if ($temp_precio >= 10000) {
+                        $err_precio = "El precio no puede ser igual o superior a 10000";
+                    } else {
+                        //  ¡ÉXITO!
+                        $precio = $temp_precio;
+                    }
+                }
+            }
+
+            //Validación de nombre
+            $temp_nombre = depurar($_POST["nombre"]);
+            if (empty($temp_nombre)) {
+                $err_nombre = "El nombre es obligatoria";
+            } else {
+                if (strlen($temp_nombre) < 40) {
+                    $err_nombre = "El nombre no puede tener más de 40 caracteres";
+                } else {
+                    $nombre = $temp_nombre;
+                }
             }
 
             //  Insertamos la prenda en la base de datos
@@ -56,6 +91,18 @@
                 echo "<p>Error al insertar</p>";
             }
         }
+
+        if (isset($nombre) && isset($talla) && isset($precio) && isset($categoria)) {
+            
+        }
+    }
+
+    function depurar($dato)
+    {
+        $dato = trim($dato);
+        $dato = stripslashes($dato);
+        $dato = htmlspecialchars($dato);
+        return $dato;
     }
     ?>
     <div class="container">
@@ -68,6 +115,9 @@
                     <div class="form-group mb-3">
                         <label class="form-label">Nombre</label>
                         <input class="form-control" type="text" name="nombre">
+                        <span class="error">
+                            * <?php if (isset($err_nombre)) echo $err_nombre ?>
+                        </span>
                     </div>
                     <div class="form-group mb-3">
                         <label class="form-label">Talla</label>
@@ -79,10 +129,16 @@
                             <option value="L">L</option>
                             <option value="XL">XL</option>
                         </select>
+                        <span class="error">
+                            * <?php if (isset($err_talla)) echo $err_talla ?>
+                        </span>
                     </div>
                     <div class="form-group mb-3">
                         <label class="form-label">Precio</label>
                         <input class="form-control" type="text" name="precio">
+                        <span class="error">
+                            * <?php if (isset($err_precio)) echo $err_precio ?>
+                        </span>
                     </div>
                     <div class="form-group mb-3">
                         <label class="form-label">Categoría</label>
@@ -92,10 +148,16 @@
                             <option value="PANTALONES">Pantalones</option>
                             <option value="ACCESORIOS">Accesorios</option>
                         </select>
+                        <span class="error">
+                            * <?php if (isset($err_categoria)) echo $err_categoria ?>
+                        </span>
                     </div>
                     <div class="form-group mb-3">
                         <label class="form-label">Imagen</label>
                         <input class="form-control" type="file" name="imagen">
+                        <span class="error">
+                            * <?php if (isset($err_imagen)) echo $err_imagen ?>
+                        </span>
                     </div>
                     <button class="btn btn-primary" type="submit">Crear</button>
                     <a class="btn btn-secondary" href="index.php">Tabla</a>
