@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Consola;
+use App\Models\Compania;
 
-class ConsolasController extends Controller
+class CompaniaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,12 +14,11 @@ class ConsolasController extends Controller
      */
     public function index()
     {
-       
-        $consolas = Consola::all();
-        //Aqui iria la logica del metodo
-        return view('consolas/index', [
-            'consolas' => $consolas
-    ]);
+        $companias = Compania::all();
+        return view('companias/index', [
+            "companias" => $companias
+        ]
+    );
     }
 
     /**
@@ -29,7 +28,7 @@ class ConsolasController extends Controller
      */
     public function create()
     {
-        return view('consolas/create');
+        return view('companias/create');
     }
 
     /**
@@ -40,14 +39,13 @@ class ConsolasController extends Controller
      */
     public function store(Request $request)
     {
-        $consola = new Consola;
-        $consola -> nombre = $request ->input('nombre');
-        $consola -> anio_salida = $request ->input('anio_salida');
-        $consola -> generacion = $request ->input('generacion');
-        $consola -> descripcion = $request ->input('descripcion');
-        $consola -> save();
+        $compania = new Compania;
+        $compania -> nombre = $request ->input('nombre');
+        $compania -> sede = $request ->input('sede');
+        $compania -> fecha_fundacion = $request ->input('fecha_fundacion');
+        $compania -> save();
 
-        return redirect('consolas');
+        return redirect('companias');
     }
 
     /**
