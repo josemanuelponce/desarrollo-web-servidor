@@ -5,11 +5,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style.css">
+    <title>Document</title>
 </head>
 
-<body>
+<body class="inicio">
+    
     <div class="container">
         <?php require '../util/base_de_datos.php' ?>
 
@@ -47,10 +49,10 @@
         ?>
 
 
-        <h1>Inicia sesion</h1>
 
-        <div class="row">
-            <div class="col-6">
+        <div class="row justify-content-center text-center mt-5">
+            <div class="col-3">
+            <h1>Cenec Moda</h1>
                 <form action="" method="post">
                     <div class="form-group mb-3">
                         <label class="form-label">Usuario</label>
@@ -64,10 +66,8 @@
                         <button class="btn btn-primary" type="submit">Iniciar sesion</button>
                     </div>
                     <div class="form-group mb-3">
-                        <button class="btn btn-dark" type="reset">Reset</button>
-                        <a class="btn btn-secondary" href="registrarse.php">Registrarse</a>
+                        <a class="btn btn-success" href="registrarse.php">Registrarse</a>
                     </div>
-                    
                 </form>
             </div>
         </div>

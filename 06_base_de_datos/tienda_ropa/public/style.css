@@ -1,0 +1,34 @@
+.inicio{
+    background-image: url("../resources/images/img/iniciar.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    font: 150% sans-serif;
+}
+
+.registrar{
+    background-image: url("../resources/images/img/t-shirts-in-shop.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    font: 150% sans-serif;
+    color: aliceblue;
+}
+body{
+    background-image: url("../resources/images/img/fondo_cliente.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    font: 100% sans-serif;
+}
+.caja_index{
+    background-color:#e8ded1b1;
+    width: 80%;
+    height:80%;
+    margin-top: 2%;
+   margin-left: 10%;
+
+}

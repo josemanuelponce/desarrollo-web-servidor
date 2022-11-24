@@ -10,48 +10,50 @@
 </head>
 
 <body>
-    <?php require '../../util/control_acceso.php' ?>
-    <?php require '../../util/base_de_datos.php' ?>
-    <?php require '../header.php' ?>
+    <div class="container">
+        <?php require '../../util/control_acceso.php' ?>
+        <?php require '../../util/base_de_datos.php' ?>
+        <?php require '../header.php' ?>
 
-    <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $prenda_id = $_POST["prenda"];
-        $cantidad = $_POST["cantidad"];
-        //$cliente_id = 10;
-        $fecha = date('Y-m-d H:i:s');   //  2022-11-15 09:25
 
-        $usuario = $_SESSION["usuario"];
+        <?php
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $prenda_id = $_POST["prenda"];
+            $cantidad = $_POST["cantidad"];
+            //$cliente_id = 10;
+            $fecha = date('Y-m-d H:i:s');   //  2022-11-15 09:25
 
-        $sql = "SELECT * FROM clientes WHERE usuario = '$usuario'";
+            $usuario = $_SESSION["usuario"];
 
-        $resultado = $conexion->query($sql);
+            $sql = "SELECT * FROM clientes WHERE usuario = '$usuario'";
 
-        if ($resultado->num_rows > 0) {
-            while ($fila = $resultado->fetch_assoc()) {
+            $resultado = $conexion->query($sql);
+
+            if ($resultado->num_rows > 0) {
+                while ($fila = $resultado->fetch_assoc()) {
+                }
             }
-        }
 
-        $sql = "INSERT INTO clientes_prendas 
+            $sql = "INSERT INTO clientes_prendas 
                 (cliente_id, prenda_id, cantidad, fecha) 
                 VALUES 
                 ('$cliente_id', '$prenda_id', '$cantidad', '$fecha')";
 
-        if ($conexion->query($sql) == "TRUE") {
-            echo "<p>Compra realizada</p>";
-        } else {
-            echo "<p>Error al comprar</p>";
+            if ($conexion->query($sql) == "TRUE") {
+                echo "<p>Compra realizada</p>";
+            } else {
+                echo "<p>Error al comprar</p>";
+            }
         }
-    }
-    ?>
+        ?>
 
-    <div class="container">
+        <br>
         <h1>Comprar prenda</h1>
-
+        <br>
         <div class="row">
             <div class="col-9">
                 <table class="table">
-                    <thead>
+                    <thead class="table-dark">
                         <tr>
                             <th>Producto</th>
                             <th>Imagen</th>

@@ -10,12 +10,17 @@
 </head>
 
 <body>
-    <?php
+    <?php 
     require '../../util/control_acceso.php';
+    require './validar.php';
     require '../../util/base_de_datos.php';
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $nombre = $_POST["nombre"];
-        $talla = $_POST["talla"];
+        if (isset($_POST["talla"])) {
+            $talla = depurar($_POST["talla"]);
+        } else {
+            $err_talla = "Selecciona una talla";
+        }
         $precio = $_POST["precio"];
         if (isset($_POST["categoria"])) {
             $categoria = $_POST["categoria"];
@@ -35,39 +40,6 @@
                 echo "<p>No se ha podido mover el fichero</p>";
             }
 
-            //Validacion de precio
-            $temp_precio = depurar($_POST["precio"]);
-            if (empty($temp_precio)) {
-                $err_precio = "El precio es obligatorio";
-            } else {
-                $temp_precio = filter_var($temp_precio, FILTER_VALIDATE_FLOAT);
-
-                if (!$temp_precio) {
-                    $err_precio = "El precio debe ser un número";
-                } else {
-                    $temp_precio = round($temp_precio, 2);
-                    if ($temp_precio < 0) {
-                        $err_precio = "El precio no puede ser negativo";
-                    } else if ($temp_precio >= 10000) {
-                        $err_precio = "El precio no puede ser igual o superior a 10000";
-                    } else {
-                        //  ¡ÉXITO!
-                        $precio = $temp_precio;
-                    }
-                }
-            }
-
-            //Validación de nombre
-            $temp_nombre = depurar($_POST["nombre"]);
-            if (empty($temp_nombre)) {
-                $err_nombre = "El nombre es obligatoria";
-            } else {
-                if (strlen($temp_nombre) < 40) {
-                    $err_nombre = "El nombre no puede tener más de 40 caracteres";
-                } else {
-                    $nombre = $temp_nombre;
-                }
-            }
 
             //  Insertamos la prenda en la base de datos
             $imagen = "/resources/images/prendas/" . $file_name;
