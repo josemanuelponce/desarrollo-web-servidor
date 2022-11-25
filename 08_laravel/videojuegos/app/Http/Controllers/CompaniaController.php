@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Compania;
+use Illuminate\Support\Facades\DB;
 
 class CompaniaController extends Controller
 {
@@ -56,7 +57,12 @@ class CompaniaController extends Controller
      */
     public function show($id)
     {
-        //
+        $compania = Compania::find($id);
+        return view('companias/show', 
+        [
+            'compania' => $compania
+        ]
+    );
     }
 
     /**
@@ -90,6 +96,8 @@ class CompaniaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('companias') -> where('id', '=', $id) -> delete();
+
+        return redirect('companias');
     }
 }

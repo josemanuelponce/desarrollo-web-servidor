@@ -22,6 +22,8 @@
                             <th>Nombre</th>
                             <th>Sede</th>
                             <th>Fecha fundación</th>
+                            <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -30,6 +32,18 @@
                                 <td>{{$compania->nombre }}</td>
                                 <td>{{$compania->sede }}</td>
                                 <td>{{$compania->fecha_fundacion}}</td>
+                                <td>
+                                    <form action="{{route('companias.show', ['compania' => $compania -> id ]) }}" method="get">
+                                        <button class="btn btn-primary" type="submit">Ver</button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="{{route('companias.destroy', ['compania' => $compania -> id])}}" method="post">
+                                        @csrf
+                                        {{ method_field('DELETE') }}
+                                        <button class="btn btn-danger" type="submit">Borrar</button>
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach       
                     </tbody>

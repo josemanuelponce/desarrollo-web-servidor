@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Consola;
+use Illuminate\Support\Facades\DB;
 
 class ConsolasController extends Controller
 {
@@ -58,7 +59,12 @@ class ConsolasController extends Controller
      */
     public function show($id)
     {
-        //
+        $consola = Consola::find($id);
+        return view('consolas/show', 
+        [
+            'consola' => $consola
+        ]
+    );
     }
 
     /**
@@ -92,6 +98,8 @@ class ConsolasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('consolas') -> where('id', '=', $id) -> delete();
+
+        return redirect('consolas');
     }
 }

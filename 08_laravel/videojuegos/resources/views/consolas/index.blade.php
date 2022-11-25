@@ -25,6 +25,8 @@
                             <th>Año de salida</th>
                             <th>Generación</th>
                             <th>Descripción</th>
+                            <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -34,6 +36,18 @@
                                 <td>{{$consola->anio_salida }}</td>
                                 <td>{{$consola->generacion}}</td>
                                 <td>{{$consola->descripcion}}</td>
+                                <td>
+                                    <form action="{{route('consolas.show', ['consola' => $consola -> id ]) }}" method="get">
+                                        <button class="btn btn-primary" type="submit">Ver</button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="{{route('consolas.destroy', ['consola' => $consola -> id])}}" method="post">
+                                        @csrf
+                                        {{ method_field('DELETE') }}
+                                        <button class="btn btn-danger" type="submit">Borrar</button>
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach       
                     </tbody>
