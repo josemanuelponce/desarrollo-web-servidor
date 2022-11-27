@@ -12,6 +12,7 @@
 <body>
     
     <div class="container">
+        
         <br>
         <h1>Nueva Compañia</h1>
         <div class="row">
@@ -33,7 +34,7 @@
                     <input class="form-control" type="date" name="fecha_fundacion">
                 </div>
                 <button class="btn btn-primary" type="submit">Crear</button>
-                <a class="btn btn-secondary" href="/companias">Listado</a>
+                <a class="btn btn-secondary" href="/companias">Listado de compañia</a>
             </div>
         </form>
         </div>

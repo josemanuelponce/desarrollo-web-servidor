@@ -9,6 +9,7 @@
 </head>
 <body>
     <div class="container">
+        
     <h1>Nueva consola</h1>
     <div class="row">
         <div class="col-6">
@@ -39,7 +40,7 @@
                 <textarea class="form-control" name="descripcion"></textarea>
             </div>
             <button class="btn btn-primary" type="submit">Crear</button>
-            <a class="btn btn-secondary" href="/consolas">Listado</a>
+            <a class="btn btn-secondary" href="/consolas">Listado de consolas</a>
         </div>
     </form>
     </div>

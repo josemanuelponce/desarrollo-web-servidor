@@ -9,6 +9,7 @@
 </head>
 <body>
     <div class="container">
+        
     <h1>Mostrar Consola</h1>
     <p>Nombre: {{ $consola -> nombre }}</p>
     <p>Año de salida: {{ $consola -> anio_salida }}</p>

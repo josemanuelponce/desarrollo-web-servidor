@@ -75,7 +75,13 @@ class ConsolasController extends Controller
      */
     public function edit($id)
     {
-        //
+        $consola = Consola::find($id);
+
+        return view('consolas/edit', 
+        [
+            'consola' => $consola
+        ]
+    );
     }
 
     /**

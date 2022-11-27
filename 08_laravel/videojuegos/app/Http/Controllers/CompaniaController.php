@@ -73,7 +73,13 @@ class CompaniaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $compania = Compania::find($id);
+
+        return view('companias/edit', 
+        [
+            'compania' => $compania
+        ]
+    );
     }
 
     /**

@@ -12,6 +12,7 @@
 <body>
     
     <div class="container">
+        
         <br>
         <h1>Nuevo videojuego</h1>
         <div class="row">

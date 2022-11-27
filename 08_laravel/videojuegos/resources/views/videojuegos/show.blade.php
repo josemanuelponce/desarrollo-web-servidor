@@ -9,6 +9,7 @@
 </head>
 <body>
     <div class="container">
+        
     <h1>Mostrar videojuego</h1>
     <p>Titulo: {{ $videojuego -> titulo }}</p>
     <p>Precio: {{ $videojuego -> precio }}</p>
