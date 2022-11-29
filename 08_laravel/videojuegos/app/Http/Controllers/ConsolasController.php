@@ -93,7 +93,15 @@ class ConsolasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $consola = Consola::find($id);
+        $consola -> nombre = $request ->input('nombre');
+        $consola -> anio_salida = $request ->input('anio_salida');
+        $consola -> generacion = $request ->input('generacion');
+        $consola -> descripcion = $request ->input('descripcion');
+        
+        $consola -> save();
+
+        return redirect('consolas');
     }
 
     /**
@@ -107,5 +115,26 @@ class ConsolasController extends Controller
         DB::table('consolas') -> where('id', '=', $id) -> delete();
 
         return redirect('consolas');
+    }
+    /**
+     * Busca todos las consolas que contengan la palabra
+     * introducida en el buscador
+     * 
+     * @param string $titulo
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request) {
+
+        $nombre = $request ->input('nombre');
+
+
+        $consolas = DB::table('consolas') 
+        -> where('nombre', 'like', '%' . $nombre . '%') ->get();
+
+        return view('consolas/search', 
+        [
+            'consolas' => $consolas
+        ]
+        );
     }
 }

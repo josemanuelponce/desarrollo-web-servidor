@@ -16,7 +16,8 @@
         <h1>Editar videojuegos</h1>
         <div class="row">
             <div class="col-9">
-                <form action="">
+                <form method="POST" action="{{ route('videojuegos.update', ['videojuego' => $videojuego -> id]) }}">
+                    {{ method_field('PUT') }}
                     @csrf
                     <div class="form-group mb-3">
                         <label class="form-label">Titulo</label>
@@ -40,7 +41,7 @@
                         <label class="form-label">Descripción</label>
                         <textarea class="form-control" name="descripcion">{{ $videojuego -> descripcion }}</textarea>
                     </div>
-                    <button class="btn btn-primary" type="submit">Crear</button>
+                    <button class="btn btn-primary" type="submit">Modificar</button>
                     <a class="btn btn-secondary" href="/videojuegos">Listado Videojuegos</a>
             </div>
             </form>

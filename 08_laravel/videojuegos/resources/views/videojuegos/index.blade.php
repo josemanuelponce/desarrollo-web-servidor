@@ -17,6 +17,19 @@
         <h1>Index de videojuegos</h1>
         <p>{{ $mensaje }}</p>
         <br>
+        <form method="get" action="{{ route('videojuegos.search') }}">
+            <div class="row">
+                <div class="col-2">
+                    <label class="form-label">Buscar por titulo</label>
+                </div>
+                <div class="col-6">
+                    <input class="form-control" type="text" name="titulo">
+                </div>
+                <div class="col-2">
+                    <button class="btn btn-primary" type="submit">Buscar</button>
+                </div>
+            </div>
+        </form>
         <div class="row">
             <div class="col-12">
                 <br>

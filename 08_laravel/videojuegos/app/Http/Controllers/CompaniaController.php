@@ -91,7 +91,14 @@ class CompaniaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $compania = Compania::find($id);
+        $compania -> nombre = $request ->input('nombre');
+        $compania -> sede = $request ->input('sede');
+        $compania -> fecha_fundacion = $request ->input('fecha_fundacion');
+
+        $compania -> save();
+
+        return redirect('companias');
     }
 
     /**
@@ -105,5 +112,26 @@ class CompaniaController extends Controller
         DB::table('companias') -> where('id', '=', $id) -> delete();
 
         return redirect('companias');
+    }
+    /**
+     * Busca todas las  compañias que contengan la palabra
+     * introducida en el buscador
+     * 
+     * @param string $titulo
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request) {
+
+        $nombre = $request ->input('nombre');
+
+
+        $companias = DB::table('companias') 
+        -> where('nombre', 'like', '%' . $nombre . '%') ->get();
+
+        return view('companias/search', 
+        [
+            'companias' => $companias
+        ]
+        );
     }
 }

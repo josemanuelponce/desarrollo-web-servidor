@@ -14,7 +14,9 @@
     <p>Nombre: {{ $compania -> nombre }}</p>
     <p>Sede: {{ $compania -> sede }}</p>
     <p>Fecha de fundacion: {{ $compania -> fecha_fundacion }}</p>
-    
+    <form method="Get" action="{{ route('companias.edit', ['compania' => $compania -> id]) }}">
+        <button class="btn btn-primary" type="submit">Editar</button>
+    </form>
 
     <a class="btn btn-secondary" href="/companias">Listado</a>
 </div>

@@ -103,7 +103,15 @@ class VideojuegosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $videojuego = Videojuego::find($id);
+        $videojuego -> titulo = $request -> input('titulo');
+        $videojuego -> precio = $request -> input('precio');
+        $videojuego -> pegi = $request -> input('pegi');
+        $videojuego -> descripcion = $request -> input('descripcion');
+
+        $videojuego -> save();
+
+        return redirect('videojuegos');
     }
 
     /**
@@ -117,5 +125,26 @@ class VideojuegosController extends Controller
         DB::table('videojuegos') -> where('id', '=', $id) -> delete();
 
         return redirect('videojuegos');
+    }
+    /**
+     * Busca todos los videojuegos que contengan la palabra
+     * introducida en el buscador
+     * 
+     * @param string $titulo
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request) {
+
+        $titulo = $request ->input('titulo');
+
+
+        $videojuegos = DB::table('videojuegos') 
+        -> where('titulo', 'like', '%' . $titulo . '%') ->get();
+
+        return view('videojuegos/search', 
+        [
+            'videojuegos' => $videojuegos
+        ]
+        );
     }
 }

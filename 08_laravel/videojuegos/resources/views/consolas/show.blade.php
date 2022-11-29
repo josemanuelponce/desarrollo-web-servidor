@@ -15,6 +15,9 @@
     <p>Año de salida: {{ $consola -> anio_salida }}</p>
     <p>Generación: {{ $consola -> generacion }}</p>
     <p>Descripción: {{ $consola -> descripcion }}</p>
+    <form method="Get" action="{{ route('consolas.edit', ['consola' => $consola -> id]) }}">
+        <button class="btn btn-primary" type="submit">Editar</button>
+    </form>
 
 <a class="btn btn-secondary" href="/consolas">Listado</a>
 </div>
