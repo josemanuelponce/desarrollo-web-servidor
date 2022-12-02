@@ -40,6 +40,16 @@
                     </select>
                 </div>
                 <div class="form-group mb-3">
+                    <label class="form-label">Compañia</label>
+                    <select class="form-select" name="compania_id" >
+                        @foreach($companias as $compania)
+                            <option value="{{ $compania ->id }}">
+                                {{ $compania->nombre}}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group mb-3">
                     <label class="form-label">Descripción</label>
                     <textarea class="form-control" name="descripcion"></textarea>
                 </div>

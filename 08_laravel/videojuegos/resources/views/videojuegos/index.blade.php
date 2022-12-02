@@ -40,6 +40,7 @@
                             <th>Precio</th>
                             <th>Pegi</th>
                             <th>Descripción</th>
+                            <th>Compañia</th>
                             <th></th>
                             <th></th>
                             <th></th>
@@ -52,6 +53,7 @@
                             <td>{{$videojuego->precio }}</td>
                             <td>{{$videojuego->pegi}}</td>
                             <td>{{$videojuego->descripcion}}</td>
+                            <td>{{$videojuego->compania->nombre}}</td>
                             <td>
                                 <form action="{{route('videojuegos.show', ['videojuego' => $videojuego -> id ]) }}"
                                     method="get">
@@ -73,6 +75,7 @@
                                 </form>
                             </td>
                         </tr>
+                        
                         @endforeach
                     </tbody>
                 </table>

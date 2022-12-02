@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('companias', function (Blueprint $table) {
             $table->id();
-            $table->string("nombre");
-            $table->string("sede");
-            $table->date("fecha_fundacion");
+            $table->string('nombre')->unique();
+            $table ->string('sede');
+            $table->date('fecha_fundacion');
             $table->timestamps();
         });
     }

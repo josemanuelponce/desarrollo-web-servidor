@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Videojuego;
+use App\Models\Compania;
 use Illuminate\Support\Facades\DB;
 
 class VideojuegosController extends Controller
@@ -40,7 +41,15 @@ class VideojuegosController extends Controller
      */
     public function create()
     {
-        return view('videojuegos/create');
+
+        $companias = Compania::all();
+        return view('videojuegos/create', 
+        [
+            'companias' => $companias
+        ]
+    );
+
+
     }
 
     /**
@@ -56,6 +65,7 @@ class VideojuegosController extends Controller
         $videojuego -> precio = $request ->input('precio');
         $videojuego -> pegi = $request ->input('pegi');
         $videojuego -> descripcion = $request ->input('descripcion');
+        $videojuego -> compania_id = $request ->input('compania_id');
         $videojuego -> save();
 
         return redirect('videojuegos');

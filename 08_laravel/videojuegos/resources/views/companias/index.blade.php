@@ -45,7 +45,7 @@
                     </thead>
                     <tbody>
                         @foreach ($companias as $compania)
-                        <tr>
+                        <tr class="table table-dark">
                             <td>{{$compania->nombre }}</td>
                             <td>{{$compania->sede }}</td>
                             <td>{{$compania->fecha_fundacion}}</td>
@@ -70,6 +70,16 @@
                                 </form>
                             </td>
                         </tr>
+                        @php
+                        $videojuegos = $compania -> videojuegos;
+                        @endphp
+                        @foreach ($videojuegos as $videojuego)
+                        <tr class="table table-light">
+                            <td>{{$videojuego ->titulo}}</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        @endforeach
                         @endforeach
                     </tbody>
                 </table>
